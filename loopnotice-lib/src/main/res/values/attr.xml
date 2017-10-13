@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MarqueeView">
+        <attr name="text" format="string" />
+        <attr name="textSize" format="integer" />
+        <attr name="textColor" format="integer" />
+        <attr name="speed" format="integer" /> <!--速度-->
+        <attr name="direction"> <!--滑动方向-->
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+        </attr>
+        <attr name="originPosition"> <!--起始位置-->
+            <enum name="inside" value="0" /> <!--控件内-->
+            <enum name="outside" value="1" /> <!--控件外-->
+        </attr>
+    </declare-styleable>
+</resources>

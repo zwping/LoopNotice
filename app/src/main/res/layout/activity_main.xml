@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#999"
+    android:orientation="vertical"
+    tools:context="win.zwping.loopnotice.MainActivity">
+
+    <TextView
+        android:text="marqueeView"
+        android:textColor="#ff0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <win.zwping.loopnotice_lib.MarqueeView
+        android:id="@+id/marquee"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/set_marquee"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="设置文字内容" />
+
+        <Button
+            android:id="@+id/marquee_start"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="开始" />
+
+        <Button
+            android:id="@+id/marquee_pass"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="暂停" />
+
+        <Button
+            android:id="@+id/marquee_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="获取当前滑动状态" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/remind1"
+        android:text="app处于非可视进程时，marqueeView会停止一切动作（也就一个文字滑动）"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:text="marqueeViewFlipper"
+        android:textColor="#ff0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <win.zwping.loopnotice_lib.MarqueeViewFlipper
+        android:id="@+id/notice"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#fff" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_list"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="增加list" />
+
+        <Button
+            android:id="@+id/add_one"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+1" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/remind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp" />
+</LinearLayout>
