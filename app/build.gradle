@@ -18,6 +18,11 @@ android {
         }
     }
 }
+//repositories {//依赖本地aar包
+//    flatDir {
+//        dirs 'libs'
+//    }
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -27,5 +32,7 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation project(':loopnotice-lib')
+    implementation project(':loopnotice-lib')  //依赖本地module
+    //compile(name: 'loopnotice-lib-v1.0', ext: 'aar') //依赖本地aar包
+    //compile 'win.zwping:loopNotice:v1.0' //依赖第三方仓库(jitPack)
 }
