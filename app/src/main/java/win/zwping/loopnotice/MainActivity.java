@@ -116,6 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.add_one:
                 mNotice.addText(returnRandomString());
                 break;
+            default:
+                break;
         }
     }
 

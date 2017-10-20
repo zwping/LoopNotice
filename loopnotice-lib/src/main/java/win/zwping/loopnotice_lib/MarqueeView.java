@@ -181,7 +181,9 @@ public class MarqueeView extends View implements Runnable {
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
-        if (getRunState()) start();
+        if (getRunState()) {
+            start();
+        }
     }
 
     @Override
@@ -196,6 +198,9 @@ public class MarqueeView extends View implements Runnable {
     }
 
     public interface OnMarqueeTextViewListener {
+        /**
+         * 跑马灯运行完成
+         */
         void marqueeComplete();
     }
 }

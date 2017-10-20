@@ -53,7 +53,7 @@ public class MarqueeViewFlipper extends RelativeLayout implements MarqueeView.On
         inflate(getContext(), R.layout.child_marquee_layout, this);
         mText1 = (MarqueeView) findViewById(R.id.text1);
         mText2 = (MarqueeView) findViewById(R.id.text2);
-        mFlipper = (ViewFlipper) findViewById(R.id.flipper);
+        mFlipper = (ViewFlipper) findViewById(R.id.view_flipper);
 
         mText1.setOnCompleteListener(this);
         mText2.setOnCompleteListener(this);

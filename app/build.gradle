@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "win.zwping.loopnotice"
         minSdkVersion 16
@@ -34,5 +34,5 @@ dependencies {
     })
     implementation project(':loopnotice-lib')  //依赖本地module
     //compile(name: 'loopnotice-lib-v1.0', ext: 'aar') //依赖本地aar包
-    //compile 'win.zwping:loopNotice:v1.0' //依赖第三方仓库(jitPack)
+//    compile 'win.zwping:loopNotice:v1.0' //依赖第三方仓库(jitPack)
 }
