@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.add_list: //每次增加10条
                 list.clear();
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 10; i++) {
                     list.add(returnRandomString());
                 }
                 mNotice.addList(list);

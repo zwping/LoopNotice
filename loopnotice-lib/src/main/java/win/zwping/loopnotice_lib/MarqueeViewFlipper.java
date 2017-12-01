@@ -1,13 +1,15 @@
 package win.zwping.loopnotice_lib;
 
+import android.animation.AnimatorSet;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
-import android.widget.RelativeLayout;
+import android.view.animation.TranslateAnimation;
 import android.widget.ViewFlipper;
 
 import java.util.ArrayList;
@@ -95,7 +97,7 @@ public class MarqueeViewFlipper extends ViewFlipper implements MarqueeView.OnMar
     private void cutListFromMaxNumber() {
         if (0 != maxNumber && list.size() > maxNumber) {
             List<String> lists = new ArrayList<>();
-            for (int i = list.size() - maxNumber; i < maxNumber + 1; i++) {
+            for (int i = list.size() - maxNumber; i < list.size(); i++) {
                 lists.add(list.get(i));
             }
             list = lists;
@@ -169,8 +171,9 @@ public class MarqueeViewFlipper extends ViewFlipper implements MarqueeView.OnMar
      * @return
      */
     public MarqueeViewFlipper addText(String string) {
-        this.list.add(getNextPlayPosition() == 0 ? list.size() : getNextPlayPosition(), string); //优先播放最新插入的string
+        this.list.add(list.size(), string); //优先播放最新插入的string
         cutListFromMaxNumber();
+        currentPlayPosition = list.size() - 2; //第一个-1为list下标最后一位、第二个-1为getNextPlayPosition中+1对冲
         firstStartRun();
         return this;
     }
