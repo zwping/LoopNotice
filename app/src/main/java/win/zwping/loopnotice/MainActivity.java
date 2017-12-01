@@ -1,6 +1,8 @@
 package win.zwping.loopnotice;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -78,9 +80,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 showToast("完成了");
             }
         });
-        mNotice.setDefaultDisplayText("暂无公告！");
+        mNotice.setDefaultDisplayText("暂无公告！").setMaxNumber(4);
+//        mNotice.addText(returnRandomString());
         //mNotice.setTextShowTime(1500);
         //mNotice.setMarqueeCompletePassTime(2000);
+
     }
 
     private void showToast(Object o) {
@@ -108,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.add_list: //每次增加10条
                 list.clear();
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 3; i++) {
                     list.add(returnRandomString());
                 }
                 mNotice.addList(list);
@@ -122,9 +126,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private String returnRandomString() {
-        return new Random().nextBoolean() ?
-                "谷歌Pixel 2和iPhone 8到底谁更厉害？" + ++position :
-                "谷歌10月4日发布了Pixel 2和Pixel 2 XL两款手机，它们一推出就在拍照上超越了iPhone 8，位列DXO Mark榜单第一。" + ++position;
+        return "谷歌Pixel 2和iPhone 8到底谁更厉害?" + ++position;
+//        return "谷歌10月4日发布了Pixel 2和Pixel 2 XL两款手机，它们一推出就在拍照上超越了iPhone 8，位列DXO Mark榜单第一。" + ++position;
+//        return new Random().nextBoolean() ?
+//                "谷歌Pixel 2和iPhone 8到底谁更厉害？" + ++position :
+//                "谷歌10月4日发布了Pixel 2和Pixel 2 XL两款手机，它们一推出就在拍照上超越了iPhone 8，位列DXO Mark榜单第一。" + ++position;
     }
 }
 

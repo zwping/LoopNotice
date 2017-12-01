@@ -28,34 +28,12 @@ import android.view.View;
  * 暂定跑马灯{@link #pause()}
  * 运动完成监听{@link #setOnCompleteListener(OnMarqueeTextViewListener)}
  * 获取其运行状态{@link #getResources()}
- * <p>  author：zwp on 2017/7/3 0003 mail：1101558280@qq.com web: http://www.zwping.win </p>
+ * <p> @author：zwp on 2017/7/3 0003 mail：1101558280@qq.com web: http://www.zwping.win </p>
  */
 
 public class MarqueeView extends View implements Runnable {
 
-    private static final int CHANGE_VIEW_WITCH = 5;
-
-    /*attr*/
-    private CharSequence text;
-    private int textSize;
-    private int textColor;
-    private int speed; //速度，默认等于2
-    private int direction; /*滑动方向*/
-    private int originPosition; //起始位置
-
-    private Paint paint; //准备一支笔
-    private Rect rect;  //准备测量文字的长宽
-
-    private int layoutWidth; //文本布局宽度
-    private int textWidth; //文字宽度
-
-    private float textYPosition; //y position，居中显示
-
-    private OnMarqueeTextViewListener listener;
-
-    private int xPosition; //当前text的位置
-    private boolean textFlag; //当前文字标识，每串文字均只有一次为true，运行完成会改为false
-    private boolean runningState; //运行状态
+    //<editor-fold desc="构造函数">
 
     public MarqueeView(Context context) {
         super(context);
@@ -83,6 +61,42 @@ public class MarqueeView extends View implements Runnable {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(attrs);
     }
+    //</editor-fold>
+    //<editor-fold desc="内部参数">
+
+    private static final int CHANGE_VIEW_WITCH = 5;
+
+    //<editor-fold desc="attrs">
+
+    private CharSequence text;
+    private int textSize;
+    private int textColor;
+    private int speed; //速度，默认等于2
+    /**
+     * 滑动方向
+     */
+    private int direction;
+    /**
+     * 起始位置
+     */
+    private int originPosition;
+    //</editor-fold>
+
+    private Paint paint; //准备一支笔
+    private Rect rect;  //准备测量文字的长宽
+
+    private int layoutWidth; //文本布局宽度
+    private int textWidth; //文字宽度
+
+    private float textYPosition; //y position，居中显示
+
+    private OnMarqueeTextViewListener listener;
+
+    private int xPosition; //当前text的位置
+    private boolean textFlag; //当前文字标识，每串文字均只有一次为true，运行完成会改为false
+    private boolean runningState; //运行状态
+    //</editor-fold>
+    //<editor-fold desc="功能变现">
 
     private void initView(AttributeSet attr) {
         if (null != attr) {
@@ -108,7 +122,29 @@ public class MarqueeView extends View implements Runnable {
         rect = new Rect();
 
         setText(text);
+
     }
+
+    @Override
+    public void run() {
+        if (runningState) invalidate();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (getRunState()) {
+            start();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        pause();
+    }
+    //</editor-fold>
+    //<editor-fold desc="绘制">
 
     @Override
     protected void onDraw(Canvas canvas) {
@@ -132,7 +168,9 @@ public class MarqueeView extends View implements Runnable {
         } else {
             if (xPosition > -(textWidth - layoutWidth))
                 postDelayed(this, speed);
-            else complete();
+            else {
+                complete();
+            }
         }
     }
 
@@ -143,11 +181,8 @@ public class MarqueeView extends View implements Runnable {
         }
         pause(); //onDraw执行两次，设置执行监听标识
     }
-
-    @Override
-    public void run() {
-        if (runningState) invalidate();
-    }
+    //</editor-fold>
+    //<editor-fold desc="API">
 
     public boolean getRunState() {
         return textFlag && runningState;
@@ -162,7 +197,7 @@ public class MarqueeView extends View implements Runnable {
         invalidate();
     }
 
-    public void setText(CharSequence text) {
+    public MarqueeView setText(CharSequence text) {
         if (null != text) {
             this.text = text;
             paint.getTextBounds(this.text.toString(), 0, this.text.length(), rect);
@@ -172,30 +207,68 @@ public class MarqueeView extends View implements Runnable {
             pause();
             invalidate();
         }
+        return this;
+    }
+
+    public MarqueeView setTextSize(int sp) {
+        this.textSize = spToPx(sp);
+        paint.setTextSize(textSize);
+        if (null != text) {
+            paint.getTextBounds(this.text.toString(), 0, this.text.length(), rect);
+            textWidth = rect.width();
+        }
+        return this;
+    }
+
+    public MarqueeView setTextColor(int color) {
+        this.textColor = color;
+        paint.setColor(textColor);
+        if (!getRunState()) invalidate();
+        return this;
+    }
+
+    public MarqueeView setSpeed(int speed) {
+        this.speed = speed;
+        if (!getRunState()) invalidate();
+        return this;
+    }
+
+    /**
+     * 设置滑动方向
+     *
+     * @param direction {0 == left / 1 == right}
+     */
+    public MarqueeView setDirection(int direction) {
+        this.direction = direction;
+        paint.setTextAlign(0 == direction ? Paint.Align.LEFT : Paint.Align.RIGHT);
+        if (!getRunState()) invalidate();
+        return this;
+    }
+
+    /**
+     * 设置滑动的起始位置
+     *
+     * @param originPosition 起始位置 {0==控件内 / 1==控件外}
+     */
+    public MarqueeView setOriginPosition(int originPosition) {
+        this.originPosition = originPosition;
+        layoutWidth = 0;
+        if (!getRunState()) invalidate();
+        return this;
     }
 
     public void setOnCompleteListener(OnMarqueeTextViewListener listener) {
         this.listener = listener;
     }
+    //</editor-fold>
+    //<editor-fold desc="工具">
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        if (getRunState()) {
-            start();
-        }
-    }
-
-    @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        pause();
-    }
-
-    private int spToPx(float sp) {
+    public int spToPx(float sp) {
         float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (sp * fontScale + 0.5f);
     }
+    //</editor-fold>
+    //<editor-fold desc="interface">
 
     public interface OnMarqueeTextViewListener {
         /**
@@ -203,4 +276,5 @@ public class MarqueeView extends View implements Runnable {
          */
         void marqueeComplete();
     }
+    //</editor-fold>
 }
