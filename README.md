@@ -1,7 +1,7 @@
 # TextNotice
 this library contain marqueeTextView / marqueeTextViewFlipper , realize circulate play text notice .
 
-[![JtiPack](https://jitpack.io/v/zwping/LoopNotice.svg)](https://jitpack.io/#win.zwping/loopNotice/)
+[![JtiPack](https://jitpack.io/v/win.zwping/loopNotice.svg)](https://jitpack.io/#win.zwping/loopNotice)
 [![JavaDoc](https://img.shields.io/badge/JavaDoc-Reference-orange.svg)](https://jitpack.io/com/github/zwping/LoopNotice/v1.0/javadoc/)
 [![Aar](https://img.shields.io/badge/aar-24kb-brightgreen.svg)](https://github.com/zwping/LoopNotice/blob/master/loopnotice-lib-v1.0.aar?raw=true)
 ![Api](https://img.shields.io/badge/API-16%2B-brightgreen.svg)
