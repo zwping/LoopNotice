@@ -34,5 +34,5 @@ dependencies {
     })
     implementation project(':loopnotice-lib')  //依赖本地module
     //compile(name: 'loopnotice-lib-v1.0', ext: 'aar') //依赖本地aar包
-//    compile 'win.zwping:loopNotice:v1.0' //依赖第三方仓库(jitPack)
+//    compile 'win.zwping:loopNotice:v1.2' //依赖第三方仓库(jitPack)
 }
